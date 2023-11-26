@@ -1,0 +1,127 @@
+.container {
+  max-height: 80%;
+  position: fixed;
+  width: 100%;
+  height: 1800px;
+  transform: translateY(-50%);
+
+  display: flex;
+  justify-content: space-around;
+}
+
+.main_page__content {
+  width: 40%;
+
+  padding: 6%;
+
+  & p {
+    margin: 0;
+    color: rgb(248, 248, 244);
+  }
+
+  position: relative;
+}
+
+.main_page__decoration {
+  width: 60%;
+  overflow: hidden;
+  padding: 10px;
+
+}
+
+.main_page__title {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 80px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.main_page__subtitle {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+.main_page__describe {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.3;
+  font-size: 18px;
+}
+
+.svg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+
+.btn-start__game {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.3em;
+  text-transform: uppercase;
+
+  margin: 30px;
+  width: 300px;
+  height: 60px;
+
+  border: none;
+  outline: none;
+  color: rgb(56, 56, 56);
+  background-color: rgb(248, 248, 244);
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+
+  &:before {
+    content: '';
+    background: linear-gradient(45deg, #ff7300, #fffb00, #48ff00, #00ffd5, #7a00ff, #ff00c8, #ff7300);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 800%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 1;
+    border-radius: 10px;
+  }
+
+  &:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(248, 248, 244);
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+    transition: all .3s ease-in-out;
+  }
+}
+
+.btn-start__game:active {
+  background-color: rgb(74, 74, 74);
+}
+
+.btn-start__game:hover:after {
+  background: transparent;
+}
+
+.btn-start__game:hover:before {
+  opacity: 1;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
