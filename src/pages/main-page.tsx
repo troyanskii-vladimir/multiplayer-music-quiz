@@ -15,7 +15,7 @@ function MainPage(): JSX.Element {
 
       <div
         className='main_page__decoration'
-      >
+      > 
         <Headphones />
       </div>
     </div>
