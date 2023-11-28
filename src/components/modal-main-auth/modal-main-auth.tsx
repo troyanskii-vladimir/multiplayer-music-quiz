@@ -2,7 +2,11 @@ import { useRef } from 'react';
 import './modal-main-auth.scss';
 
 
-function ModalMainAuth(): JSX.Element {
+type ModalMainAuthProps = {
+    onCloseButtonClick: () => void;
+}
+
+function ModalMainAuth({ onCloseButtonClick }: ModalMainAuthProps): JSX.Element {
     const loginText = useRef(null);
     const loginForm = useRef(null);
     const signupLink = useRef(null);
@@ -15,7 +19,21 @@ function ModalMainAuth(): JSX.Element {
     const handleChangeRegisterClick = () => {
         loginForm.current.style.marginLeft = "-50%";
         loginText.current.style.marginLeft = "-50%";
-    };    
+    };
+
+    const handleCloseButtonClick = () => {
+        onCloseButtonClick();
+    };
+
+
+    const handleLoginSubmit = () => {
+
+    };
+
+
+    const handleRegisterSubmit = () => {
+
+    };
 
     return (
     <div className="modal__overlay">
@@ -37,7 +55,7 @@ function ModalMainAuth(): JSX.Element {
                     <div className="slider-tab" />
                 </div>
                 <div className="form-inner">
-                    <form action="#" className="login" ref={loginForm}>
+                    <form action="#" className="login" ref={loginForm} onSubmit={handleLoginSubmit}>
                     <div className="field">
                         <input type="text" placeholder="Логин" required="" />
                     </div>
@@ -52,7 +70,7 @@ function ModalMainAuth(): JSX.Element {
                         Для начала игры необходимо зарегестрироваться
                     </div>
                     </form>
-                    <form action="#" className="signup"  ref={signupLink}>
+                    <form action="#" className="signup"  ref={signupLink} onSubmit={handleRegisterSubmit}>
                     <div className="field">
                         <input type="text" placeholder="Логин" required="" />
                     </div>

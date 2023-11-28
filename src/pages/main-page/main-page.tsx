@@ -1,7 +1,7 @@
 import './main-page.scss';
 import Headphones from './headphones';
 import { useState } from 'react';
-import ModalMainAuth from '../components/modal-main-auth/modal-main-auth';
+import ModalMainAuth from '../../components/modal-main-auth/modal-main-auth';
 
 
 
@@ -12,6 +12,11 @@ function MainPage(): JSX.Element {
     document.body.classList.add('scroll-lock');
     setIsAuthVisible(true);
   };
+
+  const handleCloseButtonClick = () => {
+    document.body.classList.remove('scroll-lock');
+    setIsAuthVisible(false);
+  }
 
   return (
     <>
@@ -31,7 +36,7 @@ function MainPage(): JSX.Element {
       </div>
       {
           isAuthVisible &&
-          <ModalMainAuth />
+          <ModalMainAuth onCloseButtonClick={handleCloseButtonClick} />
         }
     </>
   );

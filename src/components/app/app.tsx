@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MainPage from '../../pages/main-page';
+import MainPage from '../../pages/main-page/main-page';
+import LobbyPage from '../../pages/lobby-page/lobby-page';
 import { HelmetProvider } from 'react-helmet-async';
+import { AppRoute } from '../../config';
 
 
 function App(): JSX.Element {
@@ -11,8 +13,13 @@ function App(): JSX.Element {
         <Routes>
 
           <Route
-            path='/'
+            path={AppRoute.Main}
             element={<MainPage />}
+          />
+
+          <Route
+            path={AppRoute.Lobby}
+            element={<LobbyPage />}
           />
 
         </Routes>
