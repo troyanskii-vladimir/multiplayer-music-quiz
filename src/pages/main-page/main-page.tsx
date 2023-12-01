@@ -2,15 +2,21 @@ import './main-page.scss';
 import Headphones from './headphones';
 import { useState } from 'react';
 import ModalMainAuth from '../../components/modal-main-auth/modal-main-auth';
+import { Socket } from 'socket.io-client';
 
 
+type MainPageProps = {
+  socket: Socket;
+}
 
-function MainPage(): JSX.Element {
+function MainPage({socket}: MainPageProps): JSX.Element {
   const [isAuthVisible, setIsAuthVisible] = useState<boolean>(false);
 
   const handleStartButtonClick = () => {
     document.body.classList.add('scroll-lock');
     setIsAuthVisible(true);
+
+    socket.emit('testi');
   };
 
   const handleCloseButtonClick = () => {
@@ -30,7 +36,7 @@ function MainPage(): JSX.Element {
 
         <div
           className='main_page__decoration'
-        > 
+        >
           <Headphones />
         </div>
       </div>
