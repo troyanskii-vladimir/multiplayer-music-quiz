@@ -1,39 +1,44 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import './modal-main-auth.scss';
+import { Socket } from 'socket.io-client';
 
 
 type ModalMainAuthProps = {
-    onCloseButtonClick: () => void;
+  socket: Socket;
+  onCloseButtonClick: () => void;
 }
 
-function ModalMainAuth({ onCloseButtonClick }: ModalMainAuthProps): JSX.Element {
-    const loginText = useRef(null);
-    const loginForm = useRef(null);
-    const signupLink = useRef(null);
+function ModalMainAuth({ socket, onCloseButtonClick }: ModalMainAuthProps): JSX.Element {
+  const loginText = useRef(null);
+  const loginForm = useRef(null);
+  const signupLink = useRef(null);
 
-    const handleChangeLoginClick = () => {
-        loginForm.current.style.marginLeft = "0%";
-        loginText.current.style.marginLeft = "0%";
-    };
+  const [userName, setUserName] = useState<string>('');
 
-    const handleChangeRegisterClick = () => {
-        loginForm.current.style.marginLeft = "-50%";
-        loginText.current.style.marginLeft = "-50%";
-    };
+  const handleChangeLoginClick = () => {
+    loginForm.current.style.marginLeft = "0%";
+    loginText.current.style.marginLeft = "0%";
+  };
 
-    const handleCloseButtonClick = () => {
-        onCloseButtonClick();
-    };
+  const handleChangeRegisterClick = () => {
+    loginForm.current.style.marginLeft = "-50%";
+    loginText.current.style.marginLeft = "-50%";
+  };
 
-
-    const handleLoginSubmit = () => {
-
-    };
+  const handleCloseButtonClick = () => {
+    onCloseButtonClick();
+  };
 
 
-    const handleRegisterSubmit = () => {
+  const handleLoginSubmit = () => {
+    socket.emit('identity', userName)
+    onCloseButtonClick();
+  };
 
-    };
+
+  const handleRegisterSubmit = () => {
+
+  };
 
     return (
     <div className="modal__overlay">
@@ -44,7 +49,7 @@ function ModalMainAuth({ onCloseButtonClick }: ModalMainAuthProps): JSX.Element 
             </div>
             <div className="form-container">
                 <div className="slide-controls">
-                    <input type="radio" name="slide" id="login" defaultChecked="" />
+                    <input type="radio" name="slide" id="login" defaultChecked />
                     <input type="radio" name="slide" id="signup" />
                     <label htmlFor="login" className="slide login" onClick={handleChangeLoginClick}>
                         Вход
@@ -57,10 +62,10 @@ function ModalMainAuth({ onCloseButtonClick }: ModalMainAuthProps): JSX.Element 
                 <div className="form-inner">
                     <form action="#" className="login" ref={loginForm} onSubmit={handleLoginSubmit}>
                     <div className="field">
-                        <input type="text" placeholder="Логин" required="" />
+                        <input type="text" placeholder="Логин" required value={userName} onChange={(evt) => setUserName(evt.target.value)} />
                     </div>
                     <div className="field">
-                        <input type="password" placeholder="Пароль" required="" />
+                        <input type="password" placeholder="Пароль" required />
                     </div>
                     <div className="field btn">
                         <div className="btn-layer" />
@@ -72,13 +77,13 @@ function ModalMainAuth({ onCloseButtonClick }: ModalMainAuthProps): JSX.Element 
                     </form>
                     <form action="#" className="signup"  ref={signupLink} onSubmit={handleRegisterSubmit}>
                     <div className="field">
-                        <input type="text" placeholder="Логин" required="" />
+                        <input type="text" placeholder="Логин" required />
                     </div>
                     <div className="field">
-                        <input type="password" placeholder="Пароль" required="" />
+                        <input type="password" placeholder="Пароль" required />
                     </div>
                     <div className="field">
-                        <input type="password" placeholder="Подтвердите пароль" required="" />
+                        <input type="password" placeholder="Подтвердите пароль" required />
                     </div>
                     <div className="field btn">
                         <div className="btn-layer" />

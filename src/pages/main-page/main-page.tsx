@@ -15,8 +15,6 @@ function MainPage({socket}: MainPageProps): JSX.Element {
   const handleStartButtonClick = () => {
     document.body.classList.add('scroll-lock');
     setIsAuthVisible(true);
-
-    socket.emit('testi');
   };
 
   const handleCloseButtonClick = () => {
@@ -42,7 +40,7 @@ function MainPage({socket}: MainPageProps): JSX.Element {
       </div>
       {
           isAuthVisible &&
-          <ModalMainAuth onCloseButtonClick={handleCloseButtonClick} />
+          <ModalMainAuth socket={socket} onCloseButtonClick={handleCloseButtonClick} />
         }
     </>
   );
