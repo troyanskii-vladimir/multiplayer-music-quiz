@@ -1,20 +1,9 @@
-import { motion } from 'framer-motion';
 import './main-page.scss';
 
 
 function Headphones(): JSX.Element {
   return (
-    <motion.svg
-      // animate={{
-      //   scale: [1, 1.1, 1.1, 1, 1]
-      // }}
-      // transition={{
-      //   duration: 1,
-      //   ease: "easeInOut",
-      //   times: [0, 0.2, 0.5, 0.8, 1],
-      //   repeat: Infinity,
-      //   repeatDelay: 1
-      // }}
+    <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       width="60%"
@@ -782,7 +771,7 @@ function Headphones(): JSX.Element {
         fill="#A32E7C"
         d="M289.527 82.963l-1.763-5.731c-.113-.367-1.231-.057-1.121.3l1.763 5.731c.113.368 1.231.057 1.121-.3z"
       ></path>
-    </motion.svg>
+    </svg>
   );
 }
 

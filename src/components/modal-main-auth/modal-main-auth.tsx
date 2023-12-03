@@ -1,6 +1,10 @@
 import { useRef, useState } from 'react';
 import './modal-main-auth.scss';
 import { Socket } from 'socket.io-client';
+import { useAppDispatch } from '../../hooks';
+import { useForm } from 'react-hook-form';
+import { loginAction, registerAction } from '../../store/api-action';
+import { toast } from 'react-toastify';
 
 
 type ModalMainAuthProps = {
@@ -9,11 +13,20 @@ type ModalMainAuthProps = {
 }
 
 function ModalMainAuth({ socket, onCloseButtonClick }: ModalMainAuthProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const loginText = useRef(null);
   const loginForm = useRef(null);
   const signupLink = useRef(null);
 
   const [userName, setUserName] = useState<string>('');
+  const [userPassword, setUserPassword] = useState<string>('');
+
+  const [registerData, setRegisterData] = useState({
+    userName: '',
+    password: '',
+    
+  })
 
   const handleChangeLoginClick = () => {
     loginForm.current.style.marginLeft = "0%";
@@ -30,15 +43,36 @@ function ModalMainAuth({ socket, onCloseButtonClick }: ModalMainAuthProps): JSX.
   };
 
 
-  const handleLoginSubmit = () => {
-    socket.emit('identity', userName)
-    onCloseButtonClick();
-  };
+  // const handleLoginSubmit = () => {
+  //   socket.emit('identity', userName)
+  //   onCloseButtonClick();
+  // };
 
 
-  const handleRegisterSubmit = () => {
+  // const handleRegisterSubmit = () => {
 
-  };
+  // };
+
+  const { register, handleSubmit, formState: {errors, isValid} } = useForm({
+    defaultValues: {
+      userName: 'Test@test',
+    },
+    mode: 'onChange',
+  });
+
+  const onLoginSubmit = () => {
+    dispatch(loginAction({
+      login: userName,
+      password: userPassword,
+    }));
+  }
+
+  const onRegisterSubmit = () => {
+    dispatch(registerAction({
+      login: userName,
+      password: userPassword,
+    }));
+  }
 
     return (
     <div className="modal__overlay">
@@ -60,7 +94,7 @@ function ModalMainAuth({ socket, onCloseButtonClick }: ModalMainAuthProps): JSX.
                     <div className="slider-tab" />
                 </div>
                 <div className="form-inner">
-                    <form action="#" className="login" ref={loginForm} onSubmit={handleLoginSubmit}>
+                    <form action="#" className="login" ref={loginForm} onSubmit={handleSubmit(onLoginSubmit)}>
                     <div className="field">
                         <input type="text" placeholder="Логин" required value={userName} onChange={(evt) => setUserName(evt.target.value)} />
                     </div>
@@ -75,7 +109,7 @@ function ModalMainAuth({ socket, onCloseButtonClick }: ModalMainAuthProps): JSX.
                         Для начала игры необходимо зарегестрироваться
                     </div>
                     </form>
-                    <form action="#" className="signup"  ref={signupLink} onSubmit={handleRegisterSubmit}>
+                    <form action="#" className="signup" ref={signupLink} onSubmit={handleSubmit(onRegisterSubmit)}>
                     <div className="field">
                         <input type="text" placeholder="Логин" required />
                     </div>

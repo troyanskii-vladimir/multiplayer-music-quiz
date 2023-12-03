@@ -35,7 +35,7 @@ function MainPage({socket}: MainPageProps): JSX.Element {
         <div
           className='main_page__decoration'
         >
-          <Headphones />
+          {/* <Headphones /> */}
         </div>
       </div>
       {
