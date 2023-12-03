@@ -1,4 +1,11 @@
 import { Socket } from 'socket.io-client';
+import Header from '../../components/header/header';
+import './lobby-page.scss';
+import MainCardList from '../../components/main-card-list/main-card-list';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
+import { getPacks } from '../../store/packs/packs.selectors';
+import { getPacksAction } from '../../store/api-action';
 
 type LobbyPageProps = {
   socket: Socket;
@@ -6,22 +13,32 @@ type LobbyPageProps = {
 
 
 function LobbyPage({ socket }: LobbyPageProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const packs = useAppSelector(getPacks);
+
+  useEffect(() => {
+    dispatch(getPacksAction());
+  }, [])
 
   return (
-    <>
     <div className='wrapper'>
-      <div className='main_page__content'>
-        <p className='main_page__title'>Musical Quiz</p>
-        <p className='main_page__subtitle'>Играй с друзьями</p>
-        <p className='main_page__describe'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut veritatis maxime optio nisi minima repudiandae repellendus praesentium aperiam ratione. Neque eum voluptatibus nihil praesentium cumque dolor, tempore vel consequatur omnis?</p>
-        <button className='btn btn-start__game'>Начать играть</button>
-      </div>
+      <Header />
+      <main>
+        <div className='page-content'>
+          <section className='catalog'>
+            <div className='container'>
+              <h1 className="title title--h2">Каталог</h1>
+              <div className="page-content__columns">
+                <div className="catalog__content">
+                  <MainCardList packs={packs} />
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
     </div>
-    {/* {
-        isAuthVisible &&
-        <ModalMainAuth socket={socket} onCloseButtonClick={handleCloseButtonClick} />
-    } */}
-  </>
   );
 }
 

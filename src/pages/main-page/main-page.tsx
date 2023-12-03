@@ -24,7 +24,7 @@ function MainPage({socket}: MainPageProps): JSX.Element {
 
   return (
     <>
-      <div className='container'>
+      <div className='main_page__container'>
         <div className='main_page__content'>
           <p className='main_page__title'>Musical Quiz</p>
           <p className='main_page__subtitle'>Играй с друзьями</p>

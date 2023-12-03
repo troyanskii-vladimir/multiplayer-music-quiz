@@ -13,10 +13,13 @@ export enum AuthorizationStatus {
 
 export enum SliceNames {
   Auth = 'Auth',
+  Packs = 'Packs',
 }
 
 export enum APIRoute {
   Register = '/auth/register',
   Login = '/auth/login',
   Me = '/auth/me',
+
+  Packs = '/packs/getAll',
 }

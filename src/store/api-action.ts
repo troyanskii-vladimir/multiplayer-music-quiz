@@ -5,6 +5,7 @@ import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { APIRoute } from '../config';
 import { saveToken } from '../services/token';
+import { Pack } from '../types/pack';
 
 
 export const getAuthDataAction = createAsyncThunk<UserData, undefined, {
@@ -43,6 +44,19 @@ export const registerAction = createAsyncThunk<UserData, Partial<AuthData>, {
   async({login: userName, password}, {extra: api}) => {
     const {data} = await api.post<UserData>(APIRoute.Register, {userName, password, type: 'consumer'});
     saveToken(data.token);
+    return data;
+  }
+);
+
+
+export const getPacksAction = createAsyncThunk<Pack[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'getPacks',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<Pack[]>(APIRoute.Packs);
     return data;
   }
 );
