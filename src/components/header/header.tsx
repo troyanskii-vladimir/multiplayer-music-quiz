@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../config';
 import './header.scss'
+import { useAppSelector } from '../../hooks';
+import { getUserData } from '../../store/auth/auth.selectors';
 
 function Header(): JSX.Element {
+  const userData = useAppSelector(getUserData);
+
   return (
     <header className="header">
       <div className="container">
@@ -38,7 +42,7 @@ function Header(): JSX.Element {
           </ul>
         </nav> */}
         <Link className="header__basket-link" to={AppRoute.Main}>
-          Профиль
+          {userData.userName}
         </Link>
       </div>
     </header>

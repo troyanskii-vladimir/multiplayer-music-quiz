@@ -1,12 +1,27 @@
+import React from 'react';
 import { Pack } from '../../types/pack';
 import './main-cart-item.scss';
+import { Socket } from 'socket.io-client';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../config';
 
 
 type MainCardItemProps = {
   pack: Pack;
+  socket: Socket;
 }
 
-function MainCardItem({ pack }: MainCardItemProps): JSX.Element {
+function MainCardItem({ pack, socket }: MainCardItemProps): JSX.Element {
+  const navigate = useNavigate();
+
+  const handlePlayButtonClick = (evt: React.MouseEvent) => {
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    socket.emit('join_room', (pack._id));
+    navigate(AppRoute.Game);
+  };
+
   return (
     <div className='product-card'>
       <div className="product-card__img">
@@ -28,10 +43,7 @@ function MainCardItem({ pack }: MainCardItemProps): JSX.Element {
         <button
           className="btn product-card__btn"
           type="button"
-          onClick={(evt) => {
-            evt.preventDefault();
-            evt.stopPropagation();
-          }}
+          onClick={handlePlayButtonClick}
         >
           Играть
         </button>

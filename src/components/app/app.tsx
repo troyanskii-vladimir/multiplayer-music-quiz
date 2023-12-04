@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/auth/auth.selectors';
 import { useEffect } from 'react';
 import { getAuthDataAction } from '../../store/api-action';
+import GamePage from '../../pages/game-page/game-page';
 
 
 const socket = io('http://localhost:3000/');
@@ -31,12 +32,17 @@ function App(): JSX.Element {
 
           <Route
             path={AppRoute.Main}
-            element={<MainPage socket={socket} />}
+            element={<MainPage authorizationStatus={authorizationStatus} socket={socket} />}
           />
 
           <Route
             path={AppRoute.Lobby}
             element={<LobbyPage socket={socket} />}
+          />
+
+          <Route
+            path={AppRoute.Game}
+            element={<GamePage socket={socket} />}
           />
 
         </Routes>
