@@ -1,5 +1,4 @@
-import './main-page.scss';
-import Headphones from './headphones';
+// import './main-page.scss';
 import { useState } from 'react';
 import ModalMainAuth from '../../components/modal-main-auth/modal-main-auth';
 import { Socket } from 'socket.io-client';
