@@ -19,7 +19,7 @@ function GameRoundScreen({ roundData, socket }: GameRoundScreenProps): JSX.Eleme
 
   if (!roundData.artists) {
     return (
-      <p>Не, пусто вск</p>
+      <p>Не, пусто всe</p>
     )
   }
 
